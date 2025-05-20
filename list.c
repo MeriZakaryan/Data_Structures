@@ -78,26 +78,60 @@ void pop_back(List* list)
         return;
     }
 
+    if(list->head == list->tail || list->size == 1)
+    {
+        list->head == NULL;
+        list->tail == NULL;
+    }
+
+    list->tail = list->tail->prev;
+    free(list->tail->next);
+    list->tail->next = NULL;
+
+    --list->size;
 }
 
 void pop_front(List* list)
 {
+    if(list->head == NULL && list->tail == NULL)
+    {
+        return;
+    }
 
+    if(list->head == list->tail || list->size == 1)
+    {
+        list->head == NULL;
+        list->tail == NULL;
+    }
+
+    list->head = list->head->next;
+    free(list->head->prev);
+    list->head->prev = NULL;
+
+    --list->size;
 }
 
 int getSize(List* list)
 {
-
+    return list->size;
 }
 
 void printList(List* list)
 {
+    Node* current = list->head;
 
+    while(current != NULL)
+    {
+        printf("%d ", current->value);
+        current = current->next;
+    }
+    printf("\n");
+
+    printf("The size of the list is %d \n", getSize(list));
 }
-
 
 int main()
 {
-
+    
     return 0;
 }
