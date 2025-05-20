@@ -80,8 +80,8 @@ void pop_back(List* list)
 
     if(list->head == list->tail || list->size == 1)
     {
-        list->head == NULL;
-        list->tail == NULL;
+        initList(list);
+        return;
     }
 
     list->tail = list->tail->prev;
@@ -100,8 +100,8 @@ void pop_front(List* list)
 
     if(list->head == list->tail || list->size == 1)
     {
-        list->head == NULL;
-        list->tail == NULL;
+        initList(list);
+        return;
     }
 
     list->head = list->head->next;
@@ -118,6 +118,11 @@ int getSize(List* list)
 
 void printList(List* list)
 {
+    if(list->head == NULL)
+    {
+        printf("The list is empty.\n");
+    }
+
     Node* current = list->head;
 
     while(current != NULL)
@@ -125,13 +130,30 @@ void printList(List* list)
         printf("%d ", current->value);
         current = current->next;
     }
-    printf("\n");
 
-    printf("The size of the list is %d \n", getSize(list));
+    printf("\nThe size of the list is %d. \n", getSize(list));
 }
 
 int main()
 {
-    
+    List list;
+    initList(&list);
+
+    push_back(&list, 1);
+    push_back(&list, 2);
+    push_back(&list, 3);
+
+    push_front(&list, 4);
+    push_front(&list, 5);
+    push_front(&list, 6);
+
+    printList(&list);
+
+    pop_back(&list);
+    pop_front(&list);
+    pop_front(&list);
+
+    printList(&list);
+
     return 0;
 }
